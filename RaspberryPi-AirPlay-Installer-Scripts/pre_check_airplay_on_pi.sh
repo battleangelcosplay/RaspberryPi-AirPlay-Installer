@@ -92,19 +92,6 @@ else
     check_fail "No audio devices found"
 fi
 
-# Check 7: USB DAC
-echo
-USB_DAC=$(aplay -l 2>/dev/null | grep "^card" | grep -iv "bcm2835\|Headphones\|vc4-hdmi" || true)
-if [ -n "$USB_DAC" ]; then
-    echo "External audio devices:"
-    echo "$USB_DAC" | while read line; do
-        echo "  → $line"
-    done
-    check_pass "USB DAC or external audio found"
-else
-    check_warn "No USB DAC detected (only built-in audio)"
-    echo "  Connect a USB DAC for better quality"
-fi
 
 # Check 8: Pi model
 echo
